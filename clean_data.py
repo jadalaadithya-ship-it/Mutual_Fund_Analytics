@@ -96,3 +96,31 @@ perf.to_csv(
 )
 
 print("Scheme Performance cleaned successfully")
+
+
+# ===================================
+# CLEAN REMAINING DATASETS
+# ===================================
+
+remaining_files = [
+    "01_fund_master.csv",
+    "03_aum_by_fund_house.csv",
+    "04_monthly_sip_inflows.csv",
+    "05_category_inflows.csv",
+    "06_industry_folio_count.csv",
+    "09_portfolio_holdings.csv",
+    "10_benchmark_indices.csv"
+]
+
+for file in remaining_files:
+
+    df = pd.read_csv(f"{raw_path}/{file}")
+
+    df = df.drop_duplicates()
+
+    df.to_csv(
+        f"{processed_path}/{file.replace('.csv','_cleaned.csv')}",
+        index=False
+    )
+
+    print(f"{file} cleaned successfully")
